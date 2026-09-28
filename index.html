@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QR Shield — Scan Before You Click</title>
+  <meta name="description" content="Scan a QR code and check the link for phishing/malware signals before you ever open it." />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="app-header">
+      <div class="logo">
+        <span class="logo-icon">🛡️</span>
+        <h1>QR Shield</h1>
+      </div>
+      <p class="tagline">Scan a QR code. We check the link before you ever open it.</p>
+    </header>
+
+    <main>
+      <!-- Mode toggle -->
+      <div class="mode-toggle">
+        <button id="cameraModeBtn" class="mode-btn active">📷 Use Camera</button>
+        <button id="uploadModeBtn" class="mode-btn">🖼️ Upload Image</button>
+      </div>
+
+      <!-- Camera scanning area -->
+      <section id="cameraSection" class="scan-section">
+        <div id="scanFrame" class="scan-frame neutral">
+          <video id="video" playsinline></video>
+          <canvas id="canvas" hidden></canvas>
+          <div class="scan-overlay">
+            <div class="scan-corner tl"></div>
+            <div class="scan-corner tr"></div>
+            <div class="scan-corner bl"></div>
+            <div class="scan-corner br"></div>
+          </div>
+        </div>
+        <button id="startCameraBtn" class="primary-btn">Start Camera</button>
+        <p id="cameraError" class="error-text" hidden></p>
+      </section>
+
+      <!-- Upload area -->
+      <section id="uploadSection" class="scan-section" hidden>
+        <label id="dropZone" class="drop-zone" for="fileInput">
+          <span class="drop-icon">⬆️</span>
+          <span>Drag &amp; drop a QR code image, or click to browse</span>
+          <input type="file" id="fileInput" accept="image/*" hidden />
+        </label>
+      </section>
+
+      <!-- Result panel -->
+      <section id="resultPanel" class="result-panel" hidden>
+        <div id="resultGlow" class="result-glow">
+          <div id="resultIcon" class="result-icon"></div>
+          <h2 id="resultTitle"></h2>
+          <p id="resultUrl" class="result-url"></p>
+
+          <ul id="resultReasons" class="reasons-list"></ul>
+
+          <div class="result-actions">
+            <a id="openLinkBtn" class="primary-btn" target="_blank" rel="noopener noreferrer" hidden>Open Link →</a>
+            <button id="openAnywayBtn" class="danger-btn" hidden>I understand the risk — open anyway</button>
+            <button id="scanAgainBtn" class="secondary-btn">Scan Another Code</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Settings -->
+      <section class="settings-section">
+        <details>
+          <summary>⚙️ Settings — Google Safe Browsing API (optional)</summary>
+          <div class="settings-body">
+            <p>
+              By default QR Shield only runs local heuristic checks (no network calls, works offline).
+              For a real threat-database lookup, add a free
+              <a href="https://developers.google.com/safe-browsing/v4/get-started" target="_blank" rel="noopener noreferrer">Google Safe Browsing API key</a>.
+              It's stored only in your browser's local storage and sent only to Google's API.
+            </p>
+            <input type="text" id="apiKeyInput" placeholder="Paste your Safe Browsing API key here" />
+            <button id="saveKeyBtn" class="secondary-btn">Save Key</button>
+            <button id="clearKeyBtn" class="secondary-btn">Clear Key</button>
+            <p id="keyStatus" class="key-status"></p>
+          </div>
+        </details>
+      </section>
+    </main>
+
+    <footer>
+      <p>QR Shield checks for known threat signals but cannot guarantee any link is 100% safe. Always use your own judgment.</p>
+    </footer>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jsQR/1.4.0/jsQR.js"></script>
+  <script src="js/heuristics.js"></script>
+  <script src="js/safeBrowsing.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
