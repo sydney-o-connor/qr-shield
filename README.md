@@ -4,7 +4,7 @@
 
 QR Shield is a browser-based tool that scans QR codes (via camera or uploaded image) and analyzes the embedded link for common phishing / malware ("quishing") signals **before** you tap into it. Safe-looking links glow **green** and can be opened directly; suspicious ones glow **red** and are blocked behind a confirmation step.
 
-Live demo: *[add your GitHub Pages link here once deployed]*
+[Live demo](https://sydney-o-connor.github.io/qr-shield/)
 
 ![QR Shield screenshot placeholder](assets/screenshot.png)
 
