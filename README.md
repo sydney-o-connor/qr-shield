@@ -38,7 +38,7 @@ QR code phishing has spiked — fake parking meter stickers, mailed "package del
 No build step, no dependencies to install. Just:
 
 ```bash
-git clone https://github.com/yourusername/qr-shield.git
+git clone https://github.com/sydney-o-connor/qr-shield.git
 cd qr-shield
 ```
 
